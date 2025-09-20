@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_0bhC8JHZEfCIsd06oNKA2A" specification="// Use the event driven execution model.&#xA;// Switch to cycle based behavior&#xA;// by specifying '@CycleBased(200)'.&#xA;@EventDriven&#xA;&#xA;// Use @SuperSteps(yes) to enable&#xA;// super step semantics.&#xA;@SuperSteps(no)&#xD;&#xA;&#xA;interface:&#xA; &#xA;    in event EV_SYS_LOOP_UP&#xA;    in event EV_SYS_LOOP_DOWN&#xA;    in event EV_SYS_BUTTON_UP&#xA;    in event EV_SYS_BUTTON_DOWN&#xA;    in event EV_SYS_IR_UP&#xA;    in event EV_SYS_IR_DOWN&#xA;&#xA;    var bool conditionAbrir&#xA;    var bool conditionCierre&#xA;    var int tick&#xA;" name="Statechart1">
+  <sgraph:Statechart xmi:id="_0bhC8JHZEfCIsd06oNKA2A" specification="// Use the event driven execution model.&#xA;// Switch to cycle based behavior&#xA;// by specifying '@CycleBased(200)'.&#xA;@EventDriven&#xA;&#xA;// Use @SuperSteps(yes) to enable&#xA;// super step semantics.&#xA;@SuperSteps(no)&#xD;&#xA;&#xA;interface:&#xA; &#xA;    in event EV_SYS_LOOP_UP&#xA;    in event EV_SYS_LOOP_DOWN&#xA;    in event EV_SYS_BUTTON_UP&#xA;    in event EV_SYS_BUTTON_DOWN&#xA;    in event EV_SYS_IR_UP&#xA;    in event EV_SYS_IR_DOWN&#xA;    out event EV_ACT_LED_ON&#xA;    out event EV_ACT_LED_OFF&#xA;    out event EV_ACT_LED_BLINK&#xA;    &#xA;internal:&#xA;&#x9;const DEL_BRR_XX_MAX : integer = 5&#xA;    var condition : boolean&#xA;    var tick : integer = 0&#xA;" name="Statechart1">
     <regions xmi:id="_0bhC_JHZEfCIsd06oNKA2A" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_0bhC_ZHZEfCIsd06oNKA2A">
         <outgoingTransitions xmi:id="_0bhC_pHZEfCIsd06oNKA2A" target="_0bhC_5HZEfCIsd06oNKA2A"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_0bhC_5HZEfCIsd06oNKA2A" specification="EV_SYS_LOOP_UP / conditionAbrir=true&#xD;&#xA;EV_SYS_LOOP_DOWN / conditionAbrir=false&#xD;&#xA;EV_SYS_IR_UP / conditionCierre = true" name="ST_SYS_BRR_STAY" incomingTransitions="_0bhC_pHZEfCIsd06oNKA2A _v4_EEJHfEfCIsd06oNKA2A _rLY3EJHgEfCIsd06oNKA2A">
-        <outgoingTransitions xmi:id="_dB43sJHeEfCIsd06oNKA2A" specification="EV_SYS_BUTTON_UP [condition=true] / conditionAbrir= false;&#xD;&#xA; tick=tick= DEL_BRR_XX_MAX ; raise EV_ACT_LED_BLINK;" target="_LbU7kJHcEfCIsd06oNKA2A"/>
-        <outgoingTransitions xmi:id="_ZlNDgJHgEfCIsd06oNKA2A" specification="EV_SYS_IR_DOWN[conditionCierre==true] /conditionCierre = false; &#xD;&#xA;tick= DEL_BRR_XX_MAX , raise EV_ACT_LED_BLINK" target="_VQOAQJHgEfCIsd06oNKA2A"/>
+      <vertices xsi:type="sgraph:State" xmi:id="_0bhC_5HZEfCIsd06oNKA2A" specification="EV_SYS_LOOP_UP / condition=true&#xD;&#xA;EV_SYS_LOOP_DOWN / condition=false" name="ST_SYS_BRR_STAY" incomingTransitions="_0bhC_pHZEfCIsd06oNKA2A _v4_EEJHfEfCIsd06oNKA2A _rLY3EJHgEfCIsd06oNKA2A">
+        <outgoingTransitions xmi:id="_dB43sJHeEfCIsd06oNKA2A" specification="EV_SYS_BUTTON_UP [condition==true] / condition= false;&#xD;&#xA; tick = DEL_BRR_XX_MAX ; raise EV_ACT_LED_BLINK" target="_LbU7kJHcEfCIsd06oNKA2A"/>
+        <outgoingTransitions xmi:id="_ZlNDgJHgEfCIsd06oNKA2A" specification="EV_SYS_IR_DOWN / tick= DEL_BRR_XX_MAX ; raise EV_ACT_LED_BLINK" target="_VQOAQJHgEfCIsd06oNKA2A"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_LbU7kJHcEfCIsd06oNKA2A" specification="[] tick > 0 / tick --&#xD;&#xA;" name="ST_SYS_BRR_UPPING" incomingTransitions="_dB43sJHeEfCIsd06oNKA2A">
-        <outgoingTransitions xmi:id="_v4_EEJHfEfCIsd06oNKA2A" specification="[]tick==0 / raise EV_ACT_LED_ON" target="_0bhC_5HZEfCIsd06oNKA2A"/>
+      <vertices xsi:type="sgraph:State" xmi:id="_LbU7kJHcEfCIsd06oNKA2A" specification="[ tick > 0 ] / tick --&#xD;&#xA;" name="ST_SYS_BRR_UPPING" incomingTransitions="_dB43sJHeEfCIsd06oNKA2A">
+        <outgoingTransitions xmi:id="_v4_EEJHfEfCIsd06oNKA2A" specification="[tick==0] / raise EV_ACT_LED_ON" target="_0bhC_5HZEfCIsd06oNKA2A"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_VQOAQJHgEfCIsd06oNKA2A" specification="[] tick > 0 / tick --" name="ST_SYS_BRR_DOWNING" incomingTransitions="_ZlNDgJHgEfCIsd06oNKA2A">
-        <outgoingTransitions xmi:id="_rLY3EJHgEfCIsd06oNKA2A" specification="[]tick==0 / raise EV_ACT_LED_OFF" target="_0bhC_5HZEfCIsd06oNKA2A"/>
+      <vertices xsi:type="sgraph:State" xmi:id="_VQOAQJHgEfCIsd06oNKA2A" specification="[ tick > 0 ] / tick --" name="ST_SYS_BRR_DOWNING" incomingTransitions="_ZlNDgJHgEfCIsd06oNKA2A">
+        <outgoingTransitions xmi:id="_rLY3EJHgEfCIsd06oNKA2A" specification="[tick==0] / raise EV_ACT_LED_OFF" target="_0bhC_5HZEfCIsd06oNKA2A"/>
       </vertices>
     </regions>
   </sgraph:Statechart>
@@ -115,7 +115,7 @@
     <edges xmi:id="_dCCBoJHeEfCIsd06oNKA2A" type="Transition" element="_dB43sJHeEfCIsd06oNKA2A" source="_0bhDKJHZEfCIsd06oNKA2A" target="_LbU7k5HcEfCIsd06oNKA2A">
       <children xsi:type="notation:DecorationNode" xmi:id="_dCCBpJHeEfCIsd06oNKA2A" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_dCCBpZHeEfCIsd06oNKA2A"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_dCCBppHeEfCIsd06oNKA2A" x="6" y="-17"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_dCCBppHeEfCIsd06oNKA2A" x="14" y="-22"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_dCCBoZHeEfCIsd06oNKA2A" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_dCCBo5HeEfCIsd06oNKA2A" fontName="Verdana"/>
